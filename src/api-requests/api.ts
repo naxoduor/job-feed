@@ -1,5 +1,5 @@
 import { AxiosStatic } from 'axios';
-import { IPage, PositionFunction } from '@/models/models';
+import { IPage, PositionFunction, JobListing,Job } from '@/models/models';
 
 export default class BaseApi {
   public axios!: AxiosStatic;
@@ -20,4 +20,25 @@ export default class BaseApi {
    * Use our public api documentation to find out what endpoint to use
    * https://test-api.mojob.io/public/docs/
    */
+
+  public getJobListings = (): Promise<Job[]> => 
+  this.axios
+  .get(`${this.baseUrl}job/listings/`)
+  .then((response)=>response.data)
+
+  public getPositionFunctionsByTitle = (title: string): Promise<IPage<PositionFunction>> =>
+  this.axios
+        .get(`${this.baseUrl}job/position-functions/?search=${title}`)
+        .then((response) => response.data);
+
+  public getJobListingsByPositionFilter = (title:string): Promise<Job[]> => 
+  this.axios
+  .get(`${this.baseUrl}job/listings/?search=${title}`)
+  .then((response) => response.data);   
 }
+
+/**
+ * getPositionFunctionsById
+ */
+
+  
