@@ -82,16 +82,15 @@ export default class Home extends Vue {
     }
   }
 
-  async get_position_functions(title:string){
+  async get_position_functions(positionFunction:PositionFunction){
     console.log("get the position functions here")
-    console.log(title)
      this.mojobApi = new BaseApi(
       'https://test-api.mojob.io/public/',
       this.axios
     );
      try {
       const positionFunctionResponsePage: IPage<PositionFunction> =
-        await this.mojobApi.getPositionFunctionsByTitle(title);
+        await this.mojobApi.getPositionFunctionsByTitle(positionFunction.children[0].name);
       if (positionFunctionResponsePage.results) {
         console.log("all pos functions second")
         console.log(positionFunctionResponsePage.results)
