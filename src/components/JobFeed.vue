@@ -12,9 +12,9 @@
 
   
 <!-- <select v-on:change ="onChange()" v-model="selected"> -->
-  <select v-on:change ="$emit('get_position_functions',selected, positionFunction.id)" v-model="selected">
+  <select v-on:change ="$emit('get_position_functions',selected)" v-model="selected">
     <option disabled value="">Please Select</option>
-    <option v-bind:key="positionFunction.id" v-for="positionFunction in positionFunctions">{{positionFunction.children[0].name}}
+    <option  v-bind:key="positionFunction.id" v-for="positionFunction in positionFunctions" v-on:click="$emit('get_listings_by_pf_id',positionFunction.id)" value="positionFunction">{{positionFunction.children[0].name}}
     </option>
     <option v-bind:key="subPositionFunction.id" v-for="subPositionFunction in subPositionFunctions">{{subPositionFunction.children[0].name}}
     </option>

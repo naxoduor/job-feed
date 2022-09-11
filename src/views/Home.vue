@@ -8,7 +8,8 @@
       :job-filters="jobFilters"
       :position-functions="positionFunctionFilters"
       :sub-position-functions="subPositionFunctionFilters"
-    v-on:get_position_functions="get_position_functions"/>
+    v-on:get_position_functions="get_position_functions"
+    v-on:get_listings_by_pf_id="get_listings_by_pf_id"/>
   </div>
 </template>
 
@@ -81,9 +82,9 @@ export default class Home extends Vue {
     }
   }
 
-  async get_position_functions(title:string,id:string){
+  async get_position_functions(title:string){
     console.log("get the position functions here")
-    console.log(title,id)
+    console.log(title)
      this.mojobApi = new BaseApi(
       'https://test-api.mojob.io/public/',
       this.axios
@@ -106,19 +107,23 @@ export default class Home extends Vue {
       console.log(e);
     }
 
-     try{
-      console.log("get the jooooob listings in second")
-      console.log(title)
-      const jobsFilterPage: Job[]
-      =await this.mojobApi.getJobListingsByPositionFilter(title)
-      this.jobFilters=jobsFilterPage
-      console.log(jobsFilterPage)
-    }
-    catch(e)
-    {
-      console.log("failed loading job listing")
-      console.log(e)
-    }
+ 
+   }
+  async get_listings_by_pf_id(id:string){
+    console.log("get_listings_by_pf_id",id)
+     //    try{
+  //     console.log("get the jooooob listings in second")
+  //     console.log(title)
+  //     const jobsFilterPage: Job[]
+  //     =await this.mojobApi.getJobListingsByPositionFilter(title)
+  //     this.jobFilters=jobsFilterPage
+  //     console.log(jobsFilterPage)
+  //   }
+  //   catch(e)
+  //   {
+  //     console.log("failed loading job listing")
+  //     console.log(e)
+  //   }
   }
 }
 </script>
