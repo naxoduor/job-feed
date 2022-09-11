@@ -1,14 +1,6 @@
 <template>
 <div>
-  <div class="job-feed">INPUT JOB FEED DESIGN HERE</div>
-
-
-
-<select>
-    <option value="0" class="optionGroup">Parent Tag</option>
-    <option value="1" class="optionChild">Child Tag</option>
-    <option value="2" class="optionChild">Child Tag</option>
-</select>
+  <div class="job-feed">JOB FEED</div>
 
   
 <!-- <select v-on:change ="onChange()" v-model="selected"> -->
@@ -43,28 +35,6 @@ export default class JobFeed extends Vue {
   private jobFilters!: Job[];
   @Prop({ default: () => [], type: Array as () => PositionFunction[] })
   private positionFunctions!: PositionFunction[];
-
-  public selected:string=''
-
-  onChange(){
-    console.log("The selected values are")
-    console.log(this.selected)
-  }
-
-   count = 0
-
-  // Methods will be component methods
-  increment() {
-    console.log("increment")
-    console.log(this.count)
-    this.count++
-  }
-
-  decrement() {
-    console.log("decrement")
-    console.log(this.count)
-    this.count--
-  }
   
   
 }

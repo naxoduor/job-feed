@@ -31,9 +31,9 @@ export default class BaseApi {
         .get(`${this.baseUrl}job/position-functions/?search=${title}`)
         .then((response) => response.data);
 
-  public getJobListingsByPositionFilter = (id:string): Promise<Job[]> => 
+  public getJobListingsByPositionFilter = (id:number): Promise<Job[]> => 
   this.axios
-  .get(`${this.baseUrl}job/listings/?search=${id}`)
+  .get(`${this.baseUrl}job/listings/?position_functions=${id}`)
   .then((response) => response.data);   
 }
 

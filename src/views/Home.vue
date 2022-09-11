@@ -55,7 +55,6 @@ export default class Home extends Vue {
     );
 
     try{
-      console.log("get the jooooob listings")
       const jobsFilterPage: Job[]
       =await this.mojobApi.getJobListings();
       this.jobFilters=jobsFilterPage
@@ -70,9 +69,9 @@ export default class Home extends Vue {
         await this.mojobApi.getPositionFunctions();
       if (positionFunctionResponsePage.results) {
         this.positionFunctionFilters = positionFunctionResponsePage.results;
-        // console.log("print the position filters")
-        // console.log(JSON.stringify(this.positionFunctionFilters, null, 2));
-        // console.log(this.positionFunctionFilters);
+        console.log("print the position filters")
+        console.log(JSON.stringify(this.positionFunctionFilters, null, 2));
+        console.log(this.positionFunctionFilters);
       } else {
         console.log('Failed loading position function filters');
       }
@@ -82,22 +81,16 @@ export default class Home extends Vue {
     }
   }
 
-  async get_position_functions(positionFunction:PositionFunction){
-    console.log("get the position functions here")
+  async get_position_functions(positionFunction: PositionFunction){
      this.mojobApi = new BaseApi(
       'https://test-api.mojob.io/public/',
       this.axios
     );
      try {
       const positionFunctionResponsePage: IPage<PositionFunction> =
-        await this.mojobApi.getPositionFunctionsByTitle(positionFunction.children[0].name);
+        await this.mojobApi.getPositionFunctionsByTitle(positionFunction!.children[0]!.name!);
       if (positionFunctionResponsePage.results) {
-        console.log("all pos functions second")
-        console.log(positionFunctionResponsePage.results)
         this.subPositionFunctionFilters = positionFunctionResponsePage.results;
-        // console.log("print the position filters")
-        // console.log(JSON.stringify(this.positionFunctionFilters, null, 2));
-        // console.log(this.positionFunctionFilters);
       } else {
         console.log('Failed loading position function filters');
       }
@@ -106,23 +99,19 @@ export default class Home extends Vue {
       console.log(e);
     }
 
+
+    try{
+      const jobsFilterPage: Job[]
+      =await this.mojobApi.getJobListingsByPositionFilter(positionFunction.id!)
+      this.jobFilters=jobsFilterPage
+    }
+    catch(e)
+    {
+      console.log("failed loading job listing")
+      console.log(e)
+    }
+
  
    }
-  async get_listings_by_pf_id(id:string){
-    console.log("get_listings_by_pf_id",id)
-     //    try{
-  //     console.log("get the jooooob listings in second")
-  //     console.log(title)
-  //     const jobsFilterPage: Job[]
-  //     =await this.mojobApi.getJobListingsByPositionFilter(title)
-  //     this.jobFilters=jobsFilterPage
-  //     console.log(jobsFilterPage)
-  //   }
-  //   catch(e)
-  //   {
-  //     console.log("failed loading job listing")
-  //     console.log(e)
-  //   }
-  }
 }
 </script>
